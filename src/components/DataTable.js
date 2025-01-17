@@ -6,7 +6,7 @@ import {
   TableHead,
   TableRow,
   TableCell
-} from '../components/ui/table'; // Adjusted path to point to ui/table
+} from '../ui/table'; // Adjusted path to point to ui/table
 import { Input } from '../components/ui/input'; // Adjusted path to point to ui/input
 import { Button } from '../components/ui/button'; // Adjusted path to point to ui/button
 import { Search, ArrowUpDown, Download } from 'lucide-react';

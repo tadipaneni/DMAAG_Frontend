@@ -15,16 +15,36 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-2 text-gray-400">
               <li>
-                <a href="#" className="hover:text-white">GSU Records Database</a>
+                <button 
+                  onClick={() => window.location.href = '/gsu-records'} 
+                  className="hover:text-white"
+                >
+                  GSU Records Database
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:text-white">Troy Records Collection</a>
+                <button 
+                  onClick={() => window.location.href = '/troy-records'} 
+                  className="hover:text-white"
+                >
+                  Troy Records Collection
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:text-white">Research Guidelines</a>
+                <button 
+                  onClick={() => window.location.href = '/research-guidelines'} 
+                  className="hover:text-white"
+                >
+                  Research Guidelines
+                </button>
               </li>
               <li>
-                <a href="#" className="hover:text-white">Privacy Policy</a>
+                <button 
+                  onClick={() => window.location.href = '/privacy-policy'} 
+                  className="hover:text-white"
+                >
+                  Privacy Policy
+                </button>
               </li>
             </ul>
           </div>

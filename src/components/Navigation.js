@@ -1,6 +1,6 @@
 // src/components/Navigation.js
 import React from 'react';
-import { Database, Search } from 'lucide-react';
+import { Database } from 'lucide-react';
 
 export function Navigation({ currentPage, setCurrentPage }) {
   return (
