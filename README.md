@@ -1,4 +1,6 @@
-# DMAAG
+
+=======
+# DMAAG 
 
 ## Project Repositories
 - Frontend: [DMAAG_Frontend](https://github.com/tadipaneni/DMAAG_Frontend/tree/master)
@@ -127,4 +129,8 @@ npm start
 npm test
 ```
 
+<<<<<<< HEAD
 For any questions or issues, please update the Hydra ticket or contact the development team.
+=======
+For any questions or issues, please update the Hydra ticket or contact the development team.
+>>>>>>> ba70465fc1f7a2bd49cc2806f7a1a0bc32b5c221
