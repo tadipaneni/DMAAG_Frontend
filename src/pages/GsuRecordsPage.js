@@ -1,4 +1,3 @@
-// src/pages/GsuRecordsPage.js
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
@@ -27,8 +26,6 @@ export function GsuRecordsPage({ showDashboard, setShowDashboard }) {
           query: `
             query {
               gsuRecords(limit: 1500) {
-                Timestamp
-                Email_Address
                 deed_state
                 deed_county
                 deed_date
@@ -186,8 +183,6 @@ export function GsuRecordsPage({ showDashboard, setShowDashboard }) {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50 sticky top-0">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">State</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">County</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
@@ -214,8 +209,6 @@ export function GsuRecordsPage({ showDashboard, setShowDashboard }) {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {visibleRecords.map((record, index) => (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap">{record.Timestamp}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.Email_Address}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.deed_state}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.deed_county}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.deed_date}</td>

@@ -27,7 +27,7 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
         body: JSON.stringify({
           query: `
             query {
-              troyRecords(limit: 1500) {
+              troyRecords(limit: 7000) {
                 rec_number
                 source_pg
                 source_fr
