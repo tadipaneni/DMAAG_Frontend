@@ -1,11 +1,20 @@
 // src/components/Footer.js
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export function Footer() {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">DMAAG Project</h3>
+            <h3 className="text-lg font-semibold mb-4">DMMAG Project</h3>
             <p className="text-gray-400">
               Data Mining and Mapping Antebellum Georgia - A collaborative research 
               initiative exploring historical data of enslaved individuals in Georgia
@@ -16,7 +25,7 @@ export function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li>
                 <button 
-                  onClick={() => window.location.href = '/gsu-records'} 
+                  onClick={() => handleNavigation('/gsu')} 
                   className="hover:text-white"
                 >
                   GSU Records Database
@@ -24,7 +33,7 @@ export function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => window.location.href = '/troy-records'} 
+                  onClick={() => handleNavigation('/troy')} 
                   className="hover:text-white"
                 >
                   Troy Records Collection
@@ -32,7 +41,7 @@ export function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => window.location.href = '/research-guidelines'} 
+                  onClick={() => handleNavigation('/research-guidelines')} 
                   className="hover:text-white"
                 >
                   Research Guidelines
@@ -40,7 +49,7 @@ export function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => window.location.href = '/privacy-policy'} 
+                  onClick={() => handleNavigation('/privacy-policy')} 
                   className="hover:text-white"
                 >
                   Privacy Policy
@@ -52,9 +61,9 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <p className="text-gray-400">
               Georgia State University<br />
-              Department of History<br />
-              Email: research@dmaag.org<br />
-              Phone: (404) 555-0123
+              Department of English<br />
+              Email: research@gmail.com****<br />
+              Phone: (404) 555-****
             </p>
             <div className="mt-4">
               <p className="text-sm text-gray-400">

@@ -4,11 +4,13 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Select } from '../components/ui/select';
 import { Search, Download, BarChart2 } from 'lucide-react';
+import { DataDashboard } from '../components/DataDashboard';
 
-export function GsuRecordsPage({ showDashboard, setShowDashboard }) {
+export function GsuRecordsPage() {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showDashboard, setShowDashboard] = useState(false);
   const [filters, setFilters] = useState({
     state: '',
     county: '',
@@ -83,8 +85,8 @@ export function GsuRecordsPage({ showDashboard, setShowDashboard }) {
     return matchesSearch && matchesState && matchesCounty;
   });
 
-  const uniqueStates = [...new Set(records.map(r => r.deed_state).filter(Boolean))];
-  const uniqueCounties = [...new Set(records.map(r => r.deed_county).filter(Boolean))];
+  const uniqueStates = [...new Set(records.map(r => r.deed_state).filter(Boolean))].sort();
+  const uniqueCounties = [...new Set(records.map(r => r.deed_county).filter(Boolean))].sort();
 
   const handleTableScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
@@ -118,6 +120,8 @@ export function GsuRecordsPage({ showDashboard, setShowDashboard }) {
 
   return (
     <div className="max-w-full mx-auto py-8 px-4">
+      <DataDashboard type="gsu" isVisible={showDashboard} />
+      
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>GSU Records ({filteredRecords.length} entries)</CardTitle>
@@ -125,6 +129,7 @@ export function GsuRecordsPage({ showDashboard, setShowDashboard }) {
             <Button
               onClick={() => setShowDashboard(!showDashboard)}
               className="flex items-center"
+              variant={showDashboard ? "secondary" : "default"}
             >
               <BarChart2 className="w-4 h-4 mr-2" />
               {showDashboard ? 'Hide' : 'Show'} Dashboard

@@ -1,9 +1,13 @@
 // src/pages/HomePage.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
 import { Database, Book, Search, Map, Users, History } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export function HomePage({ setCurrentPage }) {
+export function HomePage() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-gradient-to-b from-blue-50 to-white min-h-screen">
       <div className="max-w-7xl mx-auto py-12 px-4">
@@ -32,7 +36,7 @@ export function HomePage({ setCurrentPage }) {
                 individuals and their communities.
               </p>
               <button 
-                onClick={() => setCurrentPage('gsu')}
+                onClick={() => navigate('/gsu')}
                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Explore GSU Records
@@ -52,7 +56,7 @@ export function HomePage({ setCurrentPage }) {
                 history and society.
               </p>
               <button 
-                onClick={() => setCurrentPage('troy')}
+                onClick={() => navigate('/troy')}
                 className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Explore Troy Records
@@ -89,29 +93,32 @@ export function HomePage({ setCurrentPage }) {
             </CardContent>
           </Card>
 
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <History className="h-6 w-6 text-blue-600 mb-2" />
-              <CardTitle className="text-lg">Data Visualization</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">
-                Dynamic visualizations to understand historical trends and patterns 
-                in the data.
-              </p>
-            </CardContent>
-          </Card>
+          {/* Updated Data Visualization card with Link */}
+          <Link to="/visualization" className="no-underline">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
+              <CardHeader>
+                <History className="h-6 w-6 text-blue-600 mb-2" />
+                <CardTitle className="text-lg">Data Visualization</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Dynamic visualizations to understand historical trends and patterns 
+                  in the data.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
 
         {/* About Section */}
         <Card className="mb-8">
           <CardHeader>
-            <CardTitle>About the DMAAG Project</CardTitle>
+            <CardTitle>About the DMMAG Project</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="prose max-w-none">
               <p className="text-gray-600 mb-4">
-                The DMAAG project combines cutting-edge technologies with historical research 
+                The DMMAG project combines cutting-edge technologies with historical research 
                 to create a comprehensive digital archive. Using PostgreSQL for database management, 
                 GraphQL for API development, React.js for frontend, and ArcGIS for geographic mapping, 
                 we're building a platform that makes historical data accessible to everyone.

@@ -5,6 +5,7 @@ import { Input } from '../components/ui/input';
 import { Select } from '../components/ui/select';
 import { Button } from '../components/ui/button';
 import { Search, Download, BarChart2 } from 'lucide-react';
+import TroyDashboard from '../components/TroyDashboard';
 
 export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
   const [records, setRecords] = useState([]);
@@ -29,8 +30,6 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
             query {
               troyRecords(limit: 7000) {
                 rec_number
-                source_pg
-                source_fr
                 enslaved_name
                 enslaved_transrole
                 enslaved_color
@@ -76,14 +75,6 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
                 trans_end_date
                 transindv_value
                 transgrp_value
-                source_author
-                source_title
-                source_loc
-                source_film_no
-                url
-                extractor
-                url_1
-                notes
               }
             }
           `
@@ -127,8 +118,8 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
            matchesLocation && matchesTransType;
   });
 
-  const uniqueLocations = [...new Set(records.map(r => r.trans_loc).filter(Boolean))];
-  const uniqueTransTypes = [...new Set(records.map(r => r.trans_type).filter(Boolean))];
+  const uniqueLocations = [...new Set(records.map(r => r.trans_loc).filter(Boolean))].sort();
+  const uniqueTransTypes = [...new Set(records.map(r => r.trans_type).filter(Boolean))].sort();
 
   const handleTableScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
@@ -162,6 +153,12 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
 
   return (
     <div className="max-w-full mx-auto py-8 px-4">
+       {/* Show Dashboard if enabled */}
+       {showDashboard && (
+        <div className="mb-8">
+          <TroyDashboard />
+        </div>
+      )}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>Troy Records ({filteredRecords.length} entries)</CardTitle>
@@ -172,6 +169,7 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
             >
               <BarChart2 className="w-4 h-4 mr-2" />
               {showDashboard ? 'Hide' : 'Show'} Dashboard
+              
             </Button>
             <Button onClick={exportData} className="flex items-center">
               <Download className="w-4 h-4 mr-2" />
@@ -228,8 +226,6 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
                   <thead className="bg-gray-50 sticky top-0">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Record #</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source Page</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source FR</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaved Name</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trans Role</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
@@ -246,19 +242,20 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver Business</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Business Role</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Business Location</th>
-                      {/* Enslaver 1 */}
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 1 Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 1 Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 1 Location</th>
-                      {/* Enslaver 2 */}
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 2 Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 2 Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 2 Location</th>
-                      {/* Enslaver 3 */}
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 3 Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 3 Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 3 Location</th>
-                      {/* Enslaver 4-7 headers similarly structured */}
+                      {/* Enslavers 1-7 */}
+                      {[1, 2, 3, 4, 5, 6, 7].map(num => (
+                        <React.Fragment key={num}>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Enslaver {num} Name
+                          </th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Enslaver {num} Role
+                          </th>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            Enslaver {num} Location
+                          </th>
+                        </React.Fragment>
+                      ))}
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Trans ID</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
@@ -267,34 +264,12 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Date</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Individual Value</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Group Value</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source Author</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source Title</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Film No</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 4 Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 4 Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 4 Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 5 Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 5 Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 5 Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 6 Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 6 Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 6 Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 7 Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 7 Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enslaver 7 Location</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">URL</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Extractor</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">URL 1</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Notes</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {visibleRecords.map((record, index) => (
                       <tr key={index} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">{record.rec_number}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.source_pg}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.source_fr}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaved_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaved_transrole}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaved_color}</td>
@@ -311,27 +286,35 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver_business}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver_businessrole}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver_businessloc}</td>
+                        {/* Enslaver 1 */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver1_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver1_trans_role}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver1_loc}</td>
+                        {/* Enslaver 2 */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver2_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver2_trans_role}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver2_loc}</td>
+                        {/* Enslaver 3 */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver3_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver3_trans_role}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver3_loc}</td>
+                        {/* Enslaver 4 */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver4_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver4_trans_role}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver4_loc}</td>
+                        {/* Enslaver 5 */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver5_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver5_trans_role}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver5_loc}</td>
+                        {/* Enslaver 6 */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver6_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver6_trans_role}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver6_loc}</td>
+                        {/* Enslaver 7 */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver7_name}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver7_trans_role}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.enslaver7_loc}</td>
+                        {/* Transaction Details */}
                         <td className="px-6 py-4 whitespace-nowrap">{record.trans_id}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.trans_loc}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.trans_type}</td>
@@ -340,22 +323,6 @@ export function TroyRecordsPage({ showDashboard, setShowDashboard }) {
                         <td className="px-6 py-4 whitespace-nowrap">{record.trans_end_date}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.transindv_value}</td>
                         <td className="px-6 py-4 whitespace-nowrap">{record.transgrp_value}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.source_author}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.source_title}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.source_loc}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.source_film_no}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <a href={record.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-                            View URL
-                          </a>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.extractor}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <a href={record.url_1} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800">
-                            View URL 1
-                          </a>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap">{record.notes}</td>
                       </tr>
                     ))}
                   </tbody>
