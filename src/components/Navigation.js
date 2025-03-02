@@ -1,7 +1,7 @@
 // src/components/Navigation.js
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Database, BarChart2 } from 'lucide-react';
+import { Database, BarChart2, Info, Search } from 'lucide-react';
 
 export function Navigation() {
   const location = useLocation();
@@ -15,7 +15,16 @@ export function Navigation() {
             <Database className="h-6 w-6" />
             <span className="font-bold text-xl">DMMAG</span>
           </Link>
-          <div className="flex space-x-8">
+          <div className="flex space-x-4">
+            <Link 
+              to="/advanced-search" 
+              className={`hover:text-blue-100 transition-colors px-3 py-2 rounded-md flex items-center ${
+                currentPath === '/advanced-search' ? 'bg-blue-700' : ''
+              }`}
+            >
+              <Search className="h-4 w-4 mr-1" />
+              Advanced Search
+            </Link>
             <Link 
               to="/gsu" 
               className={`hover:text-blue-100 transition-colors px-3 py-2 rounded-md ${
@@ -41,9 +50,20 @@ export function Navigation() {
               <BarChart2 className="h-4 w-4 mr-1" />
               Visualizations
             </Link>
+            <Link 
+              to="/about" 
+              className={`hover:text-blue-100 transition-colors px-3 py-2 rounded-md flex items-center ${
+                currentPath === '/about' ? 'bg-blue-700' : ''
+              }`}
+            >
+              <Info className="h-4 w-4 mr-1" />
+              About
+            </Link>
           </div>
         </div>
       </div>
     </nav>
   );
 }
+
+export default Navigation;

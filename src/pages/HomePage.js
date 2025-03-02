@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
-import { Database, Book, Search, Map, Users, History } from 'lucide-react';
+import { Database, Book, Search, Map, Users, History, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function HomePage() {
@@ -22,7 +22,7 @@ export function HomePage() {
           </p>
         </div>
 
-        {/* Main Collections */}
+        {/* Main Collections - Keeping original 2-column layout */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
           <Card className="hover:shadow-xl transition-shadow border-t-4 border-blue-600">
             <CardHeader>
@@ -67,31 +67,40 @@ export function HomePage() {
 
         {/* Features Section */}
         <div className="grid md:grid-cols-3 gap-6 mb-16">
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <Search className="h-6 w-6 text-blue-600 mb-2" />
-              <CardTitle className="text-lg">Advanced Search</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">
-                Powerful search functionality to locate specific records, names, 
-                locations, and historical events.
-              </p>
-            </CardContent>
-          </Card>
+          {/* Updated Advanced Search card to be a proper Link */}
+          <Link to="/advanced-search" className="no-underline">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
+              <CardHeader>
+                <Search className="h-6 w-6 text-blue-600 mb-2" />
+                <CardTitle className="text-lg">Advanced Search</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Powerful search functionality to locate specific records across both GSU and Troy 
+                  databases. Find connections between people, places, and historical events.
+                </p>
+              </CardContent>
+            </Card>
+          </Link>
 
-          <Card className="hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <Map className="h-6 w-6 text-blue-600 mb-2" />
-              <CardTitle className="text-lg">Geographic Mapping</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-gray-600">
-                Interactive ArcGIS mapping tools to visualize historical locations 
-                and movement patterns.
-              </p>
-            </CardContent>
-          </Card>
+          <a
+            href="https://storymaps.arcgis.com/stories/62ae4d70bb074afea292b3a96d43a1ca"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block hover:no-underline"
+          >
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
+              <CardHeader>
+                <Map className="h-6 w-6 text-blue-600 mb-2" />
+                <CardTitle className="text-lg">Geographic Mapping</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-600">
+                  Interactive ArcGIS mapping tools to visualize historical locations and movement patterns.
+                </p>
+              </CardContent>
+            </Card>
+          </a>
 
           {/* Updated Data Visualization card with Link */}
           <Link to="/visualization" className="no-underline">
@@ -110,47 +119,36 @@ export function HomePage() {
           </Link>
         </div>
 
-        {/* About Section */}
-        <Card className="mb-8">
-          <CardHeader>
-            <CardTitle>About the DMMAG Project</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="prose max-w-none">
-              <p className="text-gray-600 mb-4">
-                The DMMAG project combines cutting-edge technologies with historical research 
-                to create a comprehensive digital archive. Using PostgreSQL for database management, 
-                GraphQL for API development, React.js for frontend, and ArcGIS for geographic mapping, 
-                we're building a platform that makes historical data accessible to everyone.
-              </p>
-              <p className="text-gray-600">
-                Our mission is to preserve and present historical data in a modern, accessible format, 
-                enabling researchers, historians, genealogists, and the public to explore and understand 
-                the lives of enslaved individuals in Georgia during the Antebellum period.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Target Users Section */}
-        <Card>
-          <CardHeader>
-            <Users className="h-6 w-6 text-blue-600 mb-2" />
-            <CardTitle>Who Can Benefit</CardTitle>
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader className="border-b pb-4">
+            <div className="flex items-center gap-2">
+              <Users className="h-6 w-6 text-blue-600" />
+              <CardTitle>Who Can Benefit</CardTitle>
+            </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="grid md:grid-cols-3 gap-6 text-center">
-              <div>
-                <h3 className="font-semibold mb-2">Researchers & Historians</h3>
-                <p className="text-gray-600">Access comprehensive historical data and documentation</p>
+              <div className="p-4 rounded-lg hover:bg-blue-50 transition-colors">
+                <div className="bg-blue-100 rounded-full p-3 w-14 h-14 mx-auto mb-4 flex items-center justify-center">
+                  <Book className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-lg mb-3">Researchers & Historians</h3>
+                <p className="text-gray-600">Access comprehensive historical data, primary source documents, and analytical tools to support academic research and historical analysis.</p>
               </div>
-              <div>
-                <h3 className="font-semibold mb-2">Genealogists</h3>
-                <p className="text-gray-600">Trace family histories and connections</p>
+              <div className="p-4 rounded-lg hover:bg-blue-50 transition-colors">
+                <div className="bg-blue-100 rounded-full p-3 w-14 h-14 mx-auto mb-4 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-lg mb-3">Genealogists</h3>
+                <p className="text-gray-600">Trace family histories, discover ancestral connections, and reconstruct family narratives through detailed historical records.</p>
               </div>
-              <div>
-                <h3 className="font-semibold mb-2">General Public</h3>
-                <p className="text-gray-600">Explore and learn about historical events and records</p>
+              <div className="p-4 rounded-lg hover:bg-blue-50 transition-colors">
+                <div className="bg-blue-100 rounded-full p-3 w-14 h-14 mx-auto mb-4 flex items-center justify-center">
+                  <Globe className="h-6 w-6 text-blue-600" />
+                </div>
+                <h3 className="font-semibold text-lg mb-3">General Public</h3>
+                <p className="text-gray-600">Explore Georgia's rich history, learn about significant historical events, and engage with interactive visualizations of historical data.</p>
               </div>
             </div>
           </CardContent>

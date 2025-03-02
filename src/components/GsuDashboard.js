@@ -428,42 +428,7 @@ export function GsuDashboard() {
             </Card>
 
             {/* County Statistics Table */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Detailed County Statistics</CardTitle>
-              </CardHeader>
-              <CardContent className="max-h-[600px] overflow-y-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50 sticky top-0">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">County</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Transactions</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Value</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Average Value</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Acres</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unique Buyers</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Unique Sellers</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {_.orderBy(dashboardData.countyStats, ['totalValue'], ['desc'])
-                      .map((county, index) => (
-                        <tr key={index} className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-blue-50`}>
-                          <td className="px-6 py-4 whitespace-nowrap font-medium">{county.name}</td>
-                          <td className="px-6 py-4 whitespace-nowrap">{county.transactions.toLocaleString()}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-blue-600">${county.totalValue.toLocaleString()}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-green-600">
-                            ${Math.round(county.totalValue / county.transactions).toLocaleString()}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">{Math.round(county.totalAcres).toLocaleString()}</td>
-                          <td className="px-6 py-4 whitespace-nowrap">{county.uniqueBuyers}</td>
-                          <td className="px-6 py-4 whitespace-nowrap">{county.uniqueSellers}</td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </CardContent>
-            </Card>
+            
           </div>
         )}       
 

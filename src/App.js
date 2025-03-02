@@ -6,7 +6,9 @@ import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { GsuRecordsPage } from './pages/GsuRecordsPage';
 import { TroyRecordsPage } from './pages/TroyRecordsPage';
+import { AdvancedSearchPage } from './pages/AdvancedSearchPage';
 import { VisualizationPage } from './pages/VisualizationPage';
+import { AboutPage } from './pages/AboutPage';
 import { DataDashboard } from './components/DataDashboard';
 
 // Import your dashboard components
@@ -67,6 +69,7 @@ export default function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/advanced-search" element={<AdvancedSearchPage />} />
             <Route 
               path="/gsu" 
               element={
@@ -88,6 +91,7 @@ export default function App() {
             <Route path="/visualization" element={<VisualizationPage />} />
             <Route path="/visualization/gsu" element={<GsuDashboard />} />
             <Route path="/visualization/troy" element={<TroyDashboard />} />
+            <Route path="/about" element={<AboutPage />} />
           </Routes>
         </main>
         <Footer />
