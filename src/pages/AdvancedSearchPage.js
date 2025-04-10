@@ -192,27 +192,12 @@ const [advancedFilters, setAdvancedFilters] = useState({
     recordTypeId: 'troy'
   }));
 
-  // Add enslaver entries for Troy records
-  const troyEnslaverRecords = troyRecords.map((record, index) => ({
-    id: `TROY-E-${index}`,
-    recordType: 'TROY',
-    personName: record.enslaver1_name || 'Unknown Enslaver',
-    personRole: 'Enslaver',
-    date: record.trans_record_date || 'Unknown',
-    location: record.trans_loc || 'Unknown',
-    transactionType: record.trans_type || 'Unknown',
-    details: '',
-    originalRecord: record,
-    recordTypeId: 'troy'
-  }));
 
   // Combine all records
   const allRecords = React.useMemo(() => [
-    ...mappedGsuRecords, 
-    ...gsuBuyerRecords, 
-    ...mappedTroyRecords, 
-    ...troyEnslaverRecords
-  ], [mappedGsuRecords, gsuBuyerRecords, mappedTroyRecords, troyEnslaverRecords]);
+    ...mappedGsuRecords,  // Only include seller records
+    ...mappedTroyRecords  // Only include enslaved person records
+  ], [mappedGsuRecords, mappedTroyRecords]);
 
   // Function to handle column sorting
   const requestSort = (key) => {
@@ -236,7 +221,7 @@ const [advancedFilters, setAdvancedFilters] = useState({
     } else if (activeTab === 'gsu') {
       recordsToSort = [...mappedGsuRecords, ...gsuBuyerRecords];
     } else if (activeTab === 'troy') {
-      recordsToSort = [...mappedTroyRecords, ...troyEnslaverRecords];
+      recordsToSort = [...mappedTroyRecords];
     }
     
     if (sortConfig.key !== null) {
@@ -257,7 +242,7 @@ const [advancedFilters, setAdvancedFilters] = useState({
     }
     
     return recordsToSort;
-  }, [sortConfig, activeTab, allRecords, mappedGsuRecords, gsuBuyerRecords, mappedTroyRecords, troyEnslaverRecords]);
+  }, [sortConfig, activeTab, allRecords, mappedGsuRecords, gsuBuyerRecords, mappedTroyRecords]);
 
   // Apply filters to sorted records
 

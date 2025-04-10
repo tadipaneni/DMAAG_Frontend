@@ -1,11 +1,15 @@
 // src/components/Navigation.js
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Database, BarChart2, Info, Search } from 'lucide-react';
+import { Database, BarChart2, Info, Search, MapPin } from 'lucide-react';
 
 export function Navigation() {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const handleExternalLink = (url) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <nav className="bg-blue-600 text-white sticky top-0 z-50 shadow-md">
@@ -50,6 +54,14 @@ export function Navigation() {
               <BarChart2 className="h-4 w-4 mr-1" />
               Visualizations
             </Link>
+            {/* New Geographic Story Mapping link */}
+            <button
+              onClick={() => handleExternalLink('https://storymaps.arcgis.com/stories/62ae4d70bb074afea292b3a96d43a1ca')} 
+              className="hover:text-blue-100 transition-colors px-3 py-2 rounded-md flex items-center"
+            >
+              <MapPin className="h-4 w-4 mr-1" />
+              Geographic Story Mapping
+            </button>
             <Link 
               to="/about" 
               className={`hover:text-blue-100 transition-colors px-3 py-2 rounded-md flex items-center ${

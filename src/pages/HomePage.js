@@ -77,7 +77,7 @@ export function HomePage() {
               <CardContent>
                 <p className="text-gray-600">
                   Powerful search functionality to locate specific records across both GSU and Troy 
-                  databases. Find connections between people, places, and historical events.
+                  databases. 
                 </p>
               </CardContent>
             </Card>
@@ -92,11 +92,11 @@ export function HomePage() {
             <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
               <CardHeader>
                 <Map className="h-6 w-6 text-blue-600 mb-2" />
-                <CardTitle className="text-lg">Geographic Mapping</CardTitle>
+                <CardTitle className="text-lg">Geographic Story Mapping</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600">
-                  Interactive ArcGIS mapping tools to visualize historical locations and movement patterns.
+                  Interactive Geographic Story Mapping, tools to visualize historical locations and movement patterns.
                 </p>
               </CardContent>
             </Card>

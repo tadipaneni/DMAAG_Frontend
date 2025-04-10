@@ -13,13 +13,7 @@ export function Footer() {
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-lg font-semibold mb-4">DMMAG Project</h3>
-            <p className="text-gray-400">
-              Data Mining and Mapping Antebellum Georgia - A collaborative research 
-              initiative exploring historical data of enslaved individuals in Georgia
-            </p>
-          </div>
+         
           <div>
             <h3 className="text-lg font-semibold mb-4">Resources</h3>
             <ul className="space-y-2 text-gray-400">
@@ -39,37 +33,25 @@ export function Footer() {
                   Troy Records Collection
                 </button>
               </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('/research-guidelines')} 
-                  className="hover:text-white"
-                >
-                  Research Guidelines
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => handleNavigation('/privacy-policy')} 
-                  className="hover:text-white"
-                >
-                  Privacy Policy
-                </button>
-              </li>
+              
             </ul>
           </div>
+           
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <p className="text-gray-400">
               Georgia State University<br />
               Department of English<br />
-              Email: research@gmail.com****<br />
-              Phone: (404) 555-****
+              Email: ewest@gsu.edu<br />
+              Phone: (404)413-5866
             </p>
-            <div className="mt-4">
-              <p className="text-sm text-gray-400">
-                For research inquiries and database access
-              </p>
-            </div>
+            
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">DMMAG Project</h3>
+            <p className="text-gray-400">
+              Data Mining and Mapping Antebellum Georgia - A research initiative exploring historical data of enslaved individuals in Georgia
+            </p>
           </div>
         </div>
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
